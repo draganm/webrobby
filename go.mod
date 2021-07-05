@@ -1,4 +1,4 @@
-module github.com/draganm/webdriver-test
+module github.com/draganm/webroby
 
 go 1.16
 
