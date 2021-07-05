@@ -1,4 +1,4 @@
-module github.com/draganm/webroby
+module github.com/draganm/webrobby
 
 go 1.16
 
