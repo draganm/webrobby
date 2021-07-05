@@ -98,3 +98,12 @@ func (w *Webrobby) DeleteAllCookies() {
 		panic(errors.Wrap(err, "while deleting all cookies"))
 	}
 }
+
+func (w *Webrobby) Title() string {
+	t, err := w.wd.Title()
+	if err != nil {
+
+		panic(errors.Wrap(err, "while getting title"))
+	}
+	return t
+}
