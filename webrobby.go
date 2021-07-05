@@ -56,6 +56,53 @@ func (w *Webrobby) FindElement(cssSelector string) *Element {
 	}
 }
 
+func (w *Webrobby) FindElementXPath(xpathSelector string) *Element {
+	var el selenium.WebElement
+	err := backoff.Retry(
+		func() error {
+			var err error
+			el, err = w.wd.FindElement(selenium.ByXPATH, xpathSelector)
+			return err
+		},
+		w.currentTimeoutBackoff(),
+	)
+
+	if err != nil {
+		panic(errors.Wrapf(err, "while waiting to find"))
+	}
+
+	return &Element{
+		el:             el,
+		currentTimeout: w.currentTimeout,
+	}
+}
+
+func (w *Webrobby) FindElementsXPath(xpathSelector string) []*Element {
+	var els []selenium.WebElement
+	err := backoff.Retry(
+		func() error {
+			var err error
+			els, err = w.wd.FindElements(selenium.ByXPATH, xpathSelector)
+			return err
+		},
+		w.currentTimeoutBackoff(),
+	)
+
+	if err != nil {
+		panic(errors.Wrapf(err, "while waiting to find"))
+	}
+
+	elements := []*Element{}
+
+	for _, el := range els {
+		elements = append(elements, &Element{
+			el:             el,
+			currentTimeout: w.currentTimeout,
+		})
+	}
+	return elements
+}
+
 func (w *Webrobby) FindElementWithText(cssSelector, text string) *Element {
 	var el selenium.WebElement
 	err := backoff.Retry(
