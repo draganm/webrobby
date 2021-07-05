@@ -25,3 +25,12 @@ func (e *Element) Type(text string) {
 		panic(errors.Wrap(err, "while sending keys"))
 	}
 }
+
+func (e *Element) GetAttribute(name string) string {
+	av, err := e.el.GetAttribute(name)
+	if err != nil {
+
+		panic(errors.Wrap(err, "while getting text"))
+	}
+	return av
+}

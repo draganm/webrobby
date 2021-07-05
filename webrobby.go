@@ -76,7 +76,7 @@ func (w *Webrobby) FindElementWithText(cssSelector, text string) *Element {
 				}
 			}
 
-			return errors.New("no elements found")
+			return errors.Errorf("no elements found with selector %q and text %q", cssSelector, text)
 		},
 		w.currentTimeoutBackoff(),
 	)
