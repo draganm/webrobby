@@ -146,7 +146,7 @@ func (w *Webrobby) DeleteAllCookies() {
 	}
 }
 
-func (w *Webrobby) Title() string {
+func (w *Webrobby) GetTitle() string {
 	t, err := w.wd.Title()
 	if err != nil {
 

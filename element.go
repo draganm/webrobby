@@ -30,7 +30,16 @@ func (e *Element) GetAttribute(name string) string {
 	av, err := e.el.GetAttribute(name)
 	if err != nil {
 
-		panic(errors.Wrap(err, "while getting text"))
+		panic(errors.Wrapf(err, "while getting attribute %s", name))
 	}
 	return av
+}
+
+func (e *Element) GetText() string {
+	txt, err := e.el.Text()
+	if err != nil {
+
+		panic(errors.Wrap(err, "while getting text"))
+	}
+	return txt
 }
